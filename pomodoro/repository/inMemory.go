@@ -1,3 +1,9 @@
+//go:build inmemory
+// +build inmemory
+
+// includes the files if the tag is not available
+// run "go build -tags notinmemory ./" to exclude this file
+
 package repository
 
 import (
