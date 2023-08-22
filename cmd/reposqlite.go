@@ -1,6 +1,3 @@
-//go:build !inmemory
-// +build !inmemory
-
 package cmd
 
 import (

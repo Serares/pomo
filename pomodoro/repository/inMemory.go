@@ -1,14 +1,10 @@
-//go:build inmemory
-// +build inmemory
-
-// includes the files if the tag is not available
-// run "go build -tags notinmemory ./" to exclude this file
-
 package repository
 
 import (
 	"fmt"
+	"strings"
 	"sync"
+	"time"
 
 	"github.com/Serares/pomo/pomodoro"
 )
@@ -79,4 +75,23 @@ func (r *inMemoryRepo) Breaks(n int) ([]pomodoro.Interval, error) {
 		}
 	}
 	return data, nil
+}
+
+func (r *inMemoryRepo) CategorySummary(day time.Time, filter string) (time.Duration, error) {
+	r.RLock()
+	defer r.RUnlock()
+
+	var d time.Duration
+
+	filter = strings.Trim(filter, "%")
+
+	for _, i := range r.intervals {
+		if i.StartTime.Year() == day.Year() && i.StartTime.YearDay() == day.YearDay() {
+			if strings.Contains(i.Category, filter) {
+				d += i.ActualDuration
+			}
+		}
+	}
+
+	return d, nil
 }
