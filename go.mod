@@ -3,6 +3,7 @@ module github.com/Serares/pomo
 go 1.20
 
 require (
+	github.com/Serares/notify v0.0.0-20230826161046-cd3ae2640454
 	github.com/mattn/go-sqlite3 v1.14.17
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mum4k/termdash v0.13.0

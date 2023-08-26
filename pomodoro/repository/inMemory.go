@@ -1,3 +1,6 @@
+//go:build inmemory || containers
+// +build inmemory containers
+
 package repository
 
 import (
